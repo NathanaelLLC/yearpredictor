@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Head? Yes please. -->
+  <!-- honestly ask darren or follow him connect.darrennathanael.com -->
+  <!-- on forutnetly open source by pressing control + u  -->
+  <!-- anal lytics, to see if u actually see this  -->
+  <!-- if you're here, careers@nathanaelstaff.com, we might hire you, or not. just leave a message!  -->
+  <title>Year Predictor</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: white;
+    }
+    .container {
+      text-align: center;
+      margin-top: 50px;
+    }
+    h1 {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+    .loading {
+      display: flex;
+      align-items: flex-start;
+      margin-top: 2em;
+      font-size: 1em;
+      font-family: inherit;
+    }
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid blue;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      margin-right: 15px;
+      animation: spin 2.5s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .result {
+      margin-top: 1.5em;
+      font-size: 1em;
+      font-family: inherit;
+    }
+    .error-box {
+      background-color: #fdd;
+      border: 1px solid red;
+      color: #a00;
+      padding: 1em;
+      margin-top: 1.5em;
+      font-family: monospace;
+      white-space: pre-wrap;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Year predictor</h1>
+    <p>Enter the current year to predict next year</p>
+    <div class="input-row">
+      <input type="text" id="yearInput" placeholder="over here vro">
+      <button onclick="predict()">Predict next year</button>
+    </div>
+    <div id="output" class="loading" style="display:none;">
+      <div class="spinner"></div>
+      <div style="text-align:left;">
+        <span id="message">Loading...</span>
+      </div>
+    </div>
+    <div id="result" class="result" style="display:none;"></div>
+    <div id="error" class="error-box" style="display:none;"></div>
+  </div>
+
+  <script>
+    function predict() {
+      const messages = [
+        "Calculating next year with AI...",
+        "Reading your ahh code...",
+        "Analyzing spacetime vortexes..."
+      ];
+      let index = 0;
+      const output = document.getElementById("output");
+      const messageSpan = document.getElementById("message");
+      const resultDiv = document.getElementById("result");
+      const errorBox = document.getElementById("error");
+      const input = document.getElementById("yearInput");
+
+      resultDiv.style.display = "none";
+      errorBox.style.display = "none";
+      output.style.display = "flex";
+      messageSpan.textContent = messages[0];
+      // do not steel pls, i need to feed da family paypal.me/darrenofficial or buy stuff from us thansk
+      // Nathanael LLC
+      // PROPREIATELRY TRUST!!!
+      // THANK YOU FOR YOUR ATTENTION TO THIS MATTER!
+      const interval = setInterval(() => {
+        index++;
+        if (index < messages.length) {
+          messageSpan.textContent = messages[index];
+        } else {
+          clearInterval(interval);
+          output.style.display = "none";
+
+          let year = parseInt(input.value);
+          let currentYear = new Date().getFullYear();
+
+          if (isNaN(year)) {
+            // errorBox.innerHTML = "<b>Fatal error</b>: Uncaught Exception: cannot understand man in /var/www/secret/year_predictor.php on line 42";
+            errorBox.innerText = `{
+  "reqId": "NATHANAEL-LLC-ERR-4487",
+  "level": 3,
+  "time": "2025-07-06T00:00:42Z",
+  "remoteAddr": "10.69.69.69",
+  "user": "anonymous",
+  "method": "POST",
+  "url": "/predict/year",
+  "message": "Invalid input. Unable to cast string to int.",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+  "version": "8.4.1-dev",
+  "exception": {
+    "Exception": "InvalidArgumentException",
+    "Message": "cannot understand man",
+    "Code": 420,
+    "Trace": [
+      {
+        "file": "/app/logic/Parser.js",
+        "line": 27,
+        "function": "parseInt",
+        "args": ["userInput"]
+      },
+      {
+        "file": "/app/controllers/Prediction.js",
+        "line": 88,
+        "function": "handleRequest"
+      }
+    ],
+    "File": "/app/logic/Parser.js",
+    "Line": 27,
+    "Hint": "User may have typed car instead of year. Consider user training."
+  }
+}`;
+
+            errorBox.style.display = "block";
+            return;
+          }
+
+          if (year < currentYear) {
+            resultDiv.innerHTML = "i cant count in the past vro 🥀🥀🥀";
+          } else {
+            resultDiv.innerHTML = "Predicted next year: <b>" + (year + 1) + "</b>";
+          }
+
+          resultDiv.style.display = "block";
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
